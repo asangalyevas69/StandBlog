@@ -1,0 +1,35 @@
+{% load static %}
+<div class="main-banner header-text">
+      <div class="container-fluid">
+        <div class="owl-banner owl-carousel">
+          {% for publication in publications %}
+
+
+
+          <div class="item">
+            {% if publication.image %}
+            <img src="{{ publication.image.url }}" alt="">
+            {% else %}
+            <img src="{% static 'assets/images/blog-thumb-03.jpg' %}" alt="">
+            {% endif %}
+            <div class="item-content">
+              <div class="main-content">
+                <div class="meta-category">
+                  <span>{{ publication.category.name }}</span>
+                </div>
+                <a href="post-details.html"><h4>Morbi dapibus condimentum</h4></a>
+                <ul class="post-info">
+                  <li><a href="#">{{ publication.author.full_name }}</a></li>
+                  <li><a href="#">{{ publication.created|date:"F d, Y" }}</a></li>
+                  <li><a href="#">0 Comments</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+
