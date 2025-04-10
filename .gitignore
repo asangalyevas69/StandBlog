@@ -1,0 +1,9 @@
+.venv/
+env/
+.mypy_cache/
+__pycache__/
+
+media/*
+!media/default
+
+db.sqlite3
