@@ -16,12 +16,16 @@
                   <div class="blog-post">
                     <div class="blog-thumb">
                         {% if publication.image %}
+                        <a href="{% url 'blog:publication' pk=publication.id %}">
+                          <img src="{{ publication.image.url }}" alt="">
+                        </a>
+
                         <img src="{{ publication.image.url }}" alt="">
                         {% endif %}
                     </div>
                     <div class="down-content">
                       <span>Lifestyle</span>
-                      <a href="post-details.html"><h4>{{ publication.name }}</h4></a>
+                      <a href="{% url 'blog:publication' pk=publication.id %}"><h4>{{ publication.name }}</h4></a>
                       <ul class="post-info">
                         <li><a href="#">{{ publication.author.full_name }}</a></li>
                         <li><a href="#">{{ publication.created|date:"F d, Y" }}</a></li>

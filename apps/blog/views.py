@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 
 from .models import Publication, Category, Tag
@@ -27,3 +27,11 @@ def get_publications(request):
      }
     return render(request=request, template_name='publications.html', context=context)
 
+def get_publication(request, pk):
+
+    publication = get_object_or_404(Publication, id=pk)
+
+    context = {
+        'publications': publication
+    }
+    return render(request, template_name='publication.html', context=context)
