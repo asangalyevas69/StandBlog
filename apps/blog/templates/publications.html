@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+                {% for publication in publications %}
+                <div class="col-lg-6">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                        {% if publication.image %}
+                        <img src="{{ publication.image.url }}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="down-content">
+                      <span>Lifestyle</span>
+                      <a href="post-details.html"><h4>{{ publication.name }}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{ publication.author.full_name }}</a></li>
+                        <li><a href="#">{{ publication.created|date:"F d, Y" }}</a></li>
+                        <li><a href="#">0 Comments</a></li>
+                      </ul>
+                      <p>{{ publication.text|slice:":200" }}...</p>
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                                {% for tag in publication.tags.all %}
+                              <li><a href="#">{{ tag.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 {% endfor %}
+
+
+                <div class="col-lg-12">
+                  <ul class="page-numbers">
+
+                    {% if publications.number != 1 %}
+                    <li><a href="?page=1"><i class="fa fa-angle-double-left"></i></a></li>
+                    {% endif %}
+
+                    {% if publications.has_previous %}
+                    <li><a href="?page={{ publications.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+                    {% endif %}
+
+                    <li class="active"><a href="" style="width: 100px;"> {{ publications.number }} of {{ page_obj.paginator.num_pages }}</a></li>
+                    {% if publications.has_next %}
+                    <li><a href="?page={{ publications.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+                    {% endif %}
+                    {% if publications.number != publications.paginator.num_pages %}
+                    <li><a href="?page={{ publications.paginator.num_pages }}"><i class="fa fa-angle-double-right"></i></a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+
+                <div class="pagination">
+                  <span class="step-links">
+                    {% if publications.has_previous %}
+                      <a href="?page=1">&laquo; first</a>
+                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                  <span class="current">
+                      Page {{ publications.number }} of {{ page_obj.paginator.num_pages }}.
+                  </span>
+
+                  {% if page_obj.has_next %}
+                      <a href="?page={{ page_obj.next_page_number }}">next</a>
+                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                  {% endif %}
+                </span>
+              </div>
+              </div>
+            </div>
+          </div>
+          {% include 'sidebar.html' %}
+
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

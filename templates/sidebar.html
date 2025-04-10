@@ -16,7 +16,7 @@
                     </div>
                     <div class="content">
                       <ul>
-                        {% for publication in publications %}
+                        {% for publication in context_recent_publications %}
                         <li><a href="post-details.html">
                           <h5>{{ publications.name }}</h5>
                           <span>{{ publications.created|date:"F d, Y"}}</span>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="content">
                       <ul>
-                        {% for category in categories %}
+                        {% for category in context_categories %}
                         <li><a href="#">- {{ category.name }}</a></li>
                         {% endfor %}
                       </ul>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="content">
                       <ul>
-                        {% for tag in tags %}
+                        {% for tag in context_tags %}
                         <li><a href="#">{{ tag.name }}</a></li>
                         {% endfor %}
                       </ul>
